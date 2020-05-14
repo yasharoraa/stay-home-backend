@@ -1,0 +1,22 @@
+[
+    {
+        "text" : "How stay home works ?",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+    },
+    {
+        "text" : "User inpur order slip ",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+    },
+    {
+        "text" : "Retailer receives notification ",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+    },
+    {
+        "text" : "Retailer ships it ",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+    },
+    {
+        "text" : "User receives it ",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+    }
+]
