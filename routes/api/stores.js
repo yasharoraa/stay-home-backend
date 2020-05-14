@@ -67,6 +67,7 @@ router.get('/nearby', auth.optional, function (req, res, next) {
     param['$text'] = { $search: req.query.search };
   }
 
+  param['accepted'] = true;
 
   Store.find(param)
     .then(function (stores) {
