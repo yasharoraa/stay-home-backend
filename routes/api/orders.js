@@ -220,6 +220,7 @@ router.post('/', auth.required, function (req, res, next) {
                     if (!store) { return res.sendStatus(500); }
                     sendNotification(store.firebase, order.status, order._id, order.slip, order.slug);
                     return res.json(order);
+                    
                 }).catch(next);
 
             }).catch(next);

@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: "myapp",
+            name: "stay-home",
             script: "node ./bin/www",
             watch: true,
             env: {

@@ -11,6 +11,7 @@ var mongoose = require('mongoose');
 var mongoUrl = require('./config').mongoUrl;
 var admin = require('firebase-admin');
 var serviceAccount = require('./config/service_account_file.json');
+var check = require('./check');
 
 var app = express();
 
@@ -37,6 +38,8 @@ connect.then((db) => {
 admin.initializeApp({
   credential : admin.credential.cert(serviceAccount)
 })
+
+app.all('/api/*',check);
 
 require('./models/user');
 require('./models/store');

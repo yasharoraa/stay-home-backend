@@ -11,8 +11,8 @@ const spacesEndpoint = new AWS.Endpoint('nyc3.digitaloceanspaces.com');
 
 const s3 = new AWS.S3({
     endpoint: spacesEndpoint,
-    accessKeyId: process.env.SPACES_KEY,
-    secretAccessKey: process.env.SPACES_SECRET
+    accessKeyId: process.env.NODE_ENV === "production" ? process.env.SPACES_KEY : 'ZLP4VWVZHOMTQU6CYMGA',
+    secretAccessKey: process.env.NODE_ENV === "production" ? process.env.SPACES_SECRET : 'HPBo4e66zofGPsTI/2SaiUy0S27biaR3GDC/TbwA5Qs'
 });
 
 // router.get('/', function (req, res, next) {
