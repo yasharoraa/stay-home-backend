@@ -92,7 +92,7 @@ router.get('/nearby', auth.optional, function (req, res, next) {
         stores = [];
       }
 
-      Store.populate(stores, { path: 'cat', model: 'Category', select: ['image_small', 'name'] },
+      Store.populate(stores, { path: 'cat', model: 'Category', select: ['image_small', 'name','name_hi'] },
         function (err, stores) {
           return res.json(stores.map(function (store) {
             return store.toListJSONFor(store.distance);

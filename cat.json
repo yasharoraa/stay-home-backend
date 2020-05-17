@@ -3,30 +3,35 @@
         "cat_id": "cat_grocery",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/supermarket.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/supermarket_small.png",
-        "name": "Groceries (Kiryana)"
+        "name": "Groceries (Kirana)",
+        "name_hi" : "किराना"
     },
     {
         "cat_id": "cat_medicine",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/drug.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/drug_small.png",
-        "name": "Medicine"
+        "name": "Medicine",
+        "name_hi" : "दवा"
     },
     {
         "cat_id": "cat_meat",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/fish.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/fish_small.png",
-        "name": "Meat & Fish"
+        "name": "Meat & Fish",
+        "name_hi": "मांस मछली"
     },
     {
         "cat_id": "cat_fruit",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/fruit.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/fruit_small.png",
-        "name": "Fruits & Vegetable"
+        "name": "Fruits & Vegetable",
+        "name_hi": "फल और सब्जी"
     },
     {
         "cat_id": "cat_milk",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/milk.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/milk_small.png",
-        "name": "Milk & Derivatives"
+        "name": "Milk & Derivatives",
+        "name_hi" : "दूध डेयरी"
     }
 ]

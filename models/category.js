@@ -17,6 +17,10 @@ var CategorySchama = new mongoose.Schema({
     name : {
         type : String,
         required :  true
+    },
+    name_hi : {
+        type : String,
+        required : true
     }
 });
 
