@@ -8,7 +8,8 @@ router.use('/categories',require('./categories'));
 router.use('/slides',require('./slides'));
 router.use('/upload',require('./upload'));
 router.use('/address',require('./addresses'));
-router.use('/temp',require('./temps'))
+router.use('/temp',require('./temps'));
+router.use('/version',require('./version'));
 
 
 router.use(function(err, req, res, next){

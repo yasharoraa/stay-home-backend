@@ -6,7 +6,9 @@ if(process.env.NODE_ENV === "production"){
         'mongoUrl' : process.env.MONGO_URL,
         'spaces_key' : process.env.SPACES_KEY,
         'spaces_secret' : process.env.SPACES_SECRET,
-        'text_local_key' : process.env.TEXT_LOCAL_KEY
+        'text_local_key' : process.env.TEXT_LOCAL_KEY,
+        'minimim_user_app_version' : process.env.USER_APP,
+        'minimum_vendor_app_version' : process.env.VENDOR_APP
     }
 }else{
     module.exports = {
@@ -15,7 +17,9 @@ if(process.env.NODE_ENV === "production"){
         'mongoUrl' : 'mongodb://devyash:samsung@localhost/development',
         'spaces_key' : 'ZLP4VWVZHOMTQU6CYMGA',
         'spaces_secret' : 'HPBo4e66zofGPsTI/2SaiUy0S27biaR3GDC/TbwA5Qs',
-        'text_local_key' : '7v/P/3ek5BQ-8RsxmyzdeoogOE7tkPyrbM120Typxp'
+        'text_local_key' : '7v/P/3ek5BQ-8RsxmyzdeoogOE7tkPyrbM120Typxp',
+        'minimim_user_app_version' : 1,
+        'minimum_vendor_app_version' : 1
     }
 }
 
