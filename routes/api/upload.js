@@ -7,12 +7,14 @@ const multerS3 = require('multer-s3');
 var mongoose = require('mongoose');
 var Store = mongoose.model('Store');
 var auth = require('../auth');
+var key = require('../../config').spaces_key;
+var secret = require('../../config').spaces_secret;
 const spacesEndpoint = new AWS.Endpoint('nyc3.digitaloceanspaces.com');
 
 const s3 = new AWS.S3({
     endpoint: spacesEndpoint,
-    accessKeyId: process.env.NODE_ENV === "production" ? process.env.SPACES_KEY : 'ZLP4VWVZHOMTQU6CYMGA',
-    secretAccessKey: process.env.NODE_ENV === "production" ? process.env.SPACES_SECRET : 'HPBo4e66zofGPsTI/2SaiUy0S27biaR3GDC/TbwA5Qs'
+    accessKeyId: key,
+    secretAccessKey: secret
 });
 
 // router.get('/', function (req, res, next) {

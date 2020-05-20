@@ -24,23 +24,18 @@ router.post('/',auth.required,function(req,res,next) {
        
         if (typeof req.body.flat_address !== 'undefined') {
             address.flat_address = req.body.flat_address;
-            console.log("flat_address","defined");
         }
         if (typeof req.body.number !== 'undefined') {
             address.number = req.body.number;
-            console.log("number","defined");
         }
         if (typeof req.body.htr !== 'undefined') {
             address.htr = req.body.htr;
-            console.log("htr","defined");
         }
         if (typeof req.body.location !== 'undefined') {
             address.location = req.body.location;
-            console.log("location","defined");
         }
         if (typeof req.body.location_address !== 'undefined') {
             address.location_address = req.body.location_address;
-            console.log("location_address","defined");
         }
         address.user = req.payload.id;
 

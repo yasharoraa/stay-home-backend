@@ -3,6 +3,7 @@ var router = require('express').Router();
 var passport = require('passport');
 var Store = mongoose.model('Store');
 var User = mongoose.model('User');
+var StoreTemp = mongoose.model('TempStore');
 var auth = require('../auth');
 var admin = require('firebase-admin');
 const distance = require('../helpers/distance').haversineFormula;
@@ -92,7 +93,7 @@ router.get('/nearby', auth.optional, function (req, res, next) {
         stores = [];
       }
 
-      Store.populate(stores, { path: 'cat', model: 'Category', select: ['image_small', 'name','name_hi'] },
+      Store.populate(stores, { path: 'cat', model: 'Category', select: ['image_small', 'name', 'name_hi'] },
         function (err, stores) {
           return res.json(stores.map(function (store) {
             return store.toListJSONFor(store.distance);
@@ -233,15 +234,23 @@ router.post('/login', function (req, res, next) {
   })(req, res, next);
 });
 
-router.post('/', function (req, res, next) {
-  var store = new Store();
-
-  store.phone = req.body.user.phone;
-  store.setPassword(req.body.user.password);
-
-  store.save().then(function (store) {
-    return res.json(store.toAuthJSON());
+router.post('/:temp', function (req, res, next) {
+  StoreTemp.findById(req.params.temp).then(function (temp) {
+    if (!temp) { return res.status(422).send({ errors: { 'User': 'OTP Expired' } }) };
+    if (Number(req.query.otp) === temp.code) {
+      var store = new Store();
+      store.phone = temp.phone;
+      store.setPassword(temp.password);
+      store.save().then(function (store) {
+        // setTimeout(()=>res.json(address),2000 );
+        return res.json(store.toAuthJSON());
+      }).catch(next);
+    } else {
+      return res.status(422).send({ errors: { 'User': 'OTP Incorrect' } })
+    }
   }).catch(next);
 });
+
+
 
 module.exports = router;

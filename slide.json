@@ -4,19 +4,28 @@
         "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
     },
     {
-        "text" : "User inpur order slip ",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+        "text" : "Select a shop of your choice to place an order.",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_store.png"
     },
     {
-        "text" : "Retailer receives notification ",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+        "text" : "Make a new list of items in the app.",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_list.png"
     },
     {
-        "text" : "Retailer ships it ",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+        "text" : "Or upload an hand written list of items.",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_slip.png"
     },
     {
-        "text" : "User receives it ",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+        "text" : "We will send you a notification as soon as your order is accepted.",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_notification_one.png"
+    },
+    {
+        "text" : "Another notification will be sent when the order is shipped.",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_notification.png"
+    },
+    {
+        "text" : "And following our #StayHome pledge, the order will be at your doorstep in least possible time.",
+        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_ship.png"
     }
+
 ]

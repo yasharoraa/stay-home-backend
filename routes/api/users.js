@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var router = require('express').Router();
 var passport = require('passport');
 var User = mongoose.model('User');
+var UserTemp = mongoose.model('TempUser');
 var auth = require('../auth');
 
 router.get('/', auth.required, function (req, res, next) {
@@ -12,11 +13,11 @@ router.get('/', auth.required, function (req, res, next) {
     }).catch(next);
 });
 
-router.get('/check',auth.required,function(req,res,next) {
+router.get('/check', auth.required, function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
         if (!user) { return res.sendStatus(401); }
         console.log(user.firebase);
-        return res.json({firebase : user.firebase});
+        return res.json({ firebase: user.firebase });
     }).catch(next);
 });
 
@@ -63,15 +64,21 @@ router.post('/login', function (req, res, next) {
 });
 
 
-router.post('/', function (req, res, next) {
-    var user = new User();
-    console.log(req.body);
-    user.phone = req.body.user.phone;
-    user.setPassword(req.body.user.password);
-
-    user.save().then(function () {
-        return res.json(user.toAuthJSON());
+router.post('/:temp', function (req, res, next) {
+    UserTemp.findById(req.params.temp).then(function (temp) {
+        if (!temp) { return res.status(422).send({ errors: { 'User': 'OTP Expired' } }) };
+        if (Number(req.query.otp) === temp.code) {
+            var user = new User();
+            user.phone = temp.phone;
+            user.setPassword(temp.password);
+            user.save().then(function (user) {
+                return res.json(user.toAuthJSON());
+            }).catch(next);
+        } else {
+            return res.status(422).send({ errors: { 'User': 'OTP Incorrect' } })
+        }
     }).catch(next);
+
 });
 
 router.put('/firebase', auth.required, function (req, res, next) {
@@ -83,17 +90,25 @@ router.put('/firebase', auth.required, function (req, res, next) {
                 //  setTimeout(()=> res.sendStatus(200),2000 );
                 return res.sendStatus(200);
             }).catch(next);
-        }else{
+        } else {
             return res.sendStatus(500);
         }
     }).catch(next);
 });
 
+router.get('/', auth.required, function (req, res, next) {
+
+    User.findById(req.payload.id).then(function (user) {
+        if (!user) { return res.sendStatus(401); }
+        return res.json(user.toProfileJSONFor());
+    }).catch(next);
+});
+
 router.get('/profile', auth.required, function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
-      if (!user) { return res.sendStatus(401); }
-      return res.json(user.toProfileJSONFor());
+        if (!user) { return res.sendStatus(401); }
+        return res.json(user.toProfileJSONFor());
     }).catch(next);
-  })
+});
 
 module.exports = router;

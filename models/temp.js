@@ -5,7 +5,7 @@ var tempSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    pass: {
+    password: {
         type: String,
         required: true
     },
@@ -17,9 +17,11 @@ var tempSchema = new mongoose.Schema({
     expireAt: {
         type: Date,
         default: Date.now,
-        index: { expires: '1m' },
+        index: { expires: '5m' },
     },
 });
+
+
 
 mongoose.model('TempUser', tempSchema);
 mongoose.model('TempStore', tempSchema);

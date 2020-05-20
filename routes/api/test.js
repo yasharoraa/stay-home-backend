@@ -5,6 +5,7 @@ var auth = require('../auth');
 var sendNotification = require('../helpers/fcm');
 var admin = require('firebase-admin');
 var UserTemp = mongoose.model('TempUser');
+var User = mongoose.model('User');
 
 router.get('/', function (req, res, next) {
     res.json({ "test": "success" });
@@ -26,6 +27,22 @@ router.post('/temp', function (req, res, next) {
         return res.json(user);
     }).catch(next);
 });
+
+router.get('/user/:phone',function(req,res,next) {
+    User.findOne({phone:req.params.phone}).then(function (user,err) {
+        if(err){
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        if(user){
+            console.log(user);
+            return res.sendStatus(200);
+        }else{
+            console.log("user does not exist");
+            return res.sendStatus(200);
+        }
+    });
+})
 
 
 

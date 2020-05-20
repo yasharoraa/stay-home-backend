@@ -1,5 +1,8 @@
 [
     {
+        "_id": {
+            "$oid": "5ebd66c2147d67a3b25e2fb6"
+        },
         "cat_id": "cat_grocery",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/supermarket.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/supermarket_small.png",
@@ -7,6 +10,9 @@
         "name_hi" : "किराना"
     },
     {
+        "_id": {
+            "$oid": "5ebd66c2147d67a3b25e2fb7"
+        },
         "cat_id": "cat_medicine",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/drug.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/drug_small.png",
@@ -14,6 +20,9 @@
         "name_hi" : "दवा"
     },
     {
+        "_id": {
+            "$oid": "5ebd66c2147d67a3b25e2fb8"
+        },
         "cat_id": "cat_meat",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/fish.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/fish_small.png",
@@ -21,6 +30,9 @@
         "name_hi": "मांस मछली"
     },
     {
+        "_id": {
+            "$oid": "5ebd66c2147d67a3b25e2fb9"
+        },
         "cat_id": "cat_fruit",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/fruit.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/fruit_small.png",
@@ -28,6 +40,9 @@
         "name_hi": "फल और सब्जी"
     },
     {
+        "_id": {
+            "$oid": "5ebd66c2147d67a3b25e2fba"
+        },
         "cat_id": "cat_milk",
         "image": "https://stayhome.nyc3.digitaloceanspaces.com/categories/milk.png",
         "image_small": "https://stayhome.nyc3.digitaloceanspaces.com/categories/milk_small.png",
