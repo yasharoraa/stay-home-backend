@@ -8,7 +8,8 @@ if(process.env.NODE_ENV === "production"){
         'spaces_secret' : process.env.SPACES_SECRET,
         'text_local_key' : process.env.TEXT_LOCAL_KEY,
         'minimim_user_app_version' : process.env.USER_APP,
-        'minimum_vendor_app_version' : process.env.VENDOR_APP
+        'minimum_vendor_app_version' : process.env.VENDOR_APP,
+        'google_api_key' : process.env.GOOGLE_KEY
     }
 }else{
     module.exports = {
@@ -19,7 +20,8 @@ if(process.env.NODE_ENV === "production"){
         'spaces_secret' : 'HPBo4e66zofGPsTI/2SaiUy0S27biaR3GDC/TbwA5Qs',
         'text_local_key' : '7v/P/3ek5BQ-8RsxmyzdeoogOE7tkPyrbM120Typxp',
         'minimim_user_app_version' : 1,
-        'minimum_vendor_app_version' : 1
+        'minimum_vendor_app_version' : 1,
+        'google_api_key' : 'AIzaSyC5LH5UQ8_J0ZtZWsFBdG9HZdaxeYPPkQo'
     }
 }
 

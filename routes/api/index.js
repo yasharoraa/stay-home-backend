@@ -10,6 +10,7 @@ router.use('/upload',require('./upload'));
 router.use('/address',require('./addresses'));
 router.use('/temp',require('./temps'));
 router.use('/version',require('./version'));
+router.use('/geocoding',require('./geocoding'));
 
 
 router.use(function(err, req, res, next){
