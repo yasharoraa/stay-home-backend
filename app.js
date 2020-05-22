@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-const connect = mongoose.connect(mongoUrl, {useNewUrlParser: true});
+const connect = mongoose.connect(mongoUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 
 connect.then((db) => {
     console.log('Connected correctly to server');
