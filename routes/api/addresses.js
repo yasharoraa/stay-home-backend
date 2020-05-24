@@ -25,9 +25,13 @@ router.post('/',auth.required,function(req,res,next) {
         if (typeof req.body.flat_address !== 'undefined') {
             address.flat_address = req.body.flat_address;
         }
+
         if (typeof req.body.number !== 'undefined') {
             address.number = req.body.number;
+        }else{
+            address.number = user.phone;
         }
+
         if (typeof req.body.htr !== 'undefined') {
             address.htr = req.body.htr;
         }
