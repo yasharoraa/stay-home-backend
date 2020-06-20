@@ -39,7 +39,7 @@ admin.initializeApp({
   credential : admin.credential.cert(serviceAccount)
 })
 
-app.all('/api/*',check);
+
 
 require('./models/user');
 require('./models/store');
@@ -48,9 +48,10 @@ require('./models/address');
 require('./models/order')
 require('./models/slide');
 require('./models/temp');
+require('./models/reset');
 require('./config/userpassport');
 
-
+app.all('/api/*',check);
 
 app.use(require('./routes'));
 

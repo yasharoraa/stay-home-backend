@@ -4,6 +4,9 @@ var passport = require('passport');
 var Store = mongoose.model('Store');
 var User = mongoose.model('User');
 var StoreTemp = mongoose.model('TempStore');
+var StoreReset = mongoose.model('ResetStore');
+var Store = mongoose.model('Store');
+
 var auth = require('../auth');
 var admin = require('firebase-admin');
 const distance = require('../helpers/distance').haversineFormula;
@@ -11,7 +14,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', auth.required, function (req, res, next) {
   Store.findById(req.payload.id).then(function (store) {
-    if (!store) { return res.sendStatus(401); }
+    if (req.payload.salt !== store.salt) { return res.sendStatus(401); }
 
     return res.json(store.toFindJSON());
   }).catch(next);
@@ -19,21 +22,21 @@ router.get('/', auth.required, function (req, res, next) {
 
 router.get('/profile', auth.required, function (req, res, next) {
   Store.findById(req.payload.id).then(function (store) {
-    if (!store) { return res.sendStatus(401); }
+    if (req.payload.salt !== store.salt) { return res.sendStatus(401); }
     return res.json(store.toProfileJSONFor());
   }).catch(next);
 })
 
 router.get('/amionline', auth.required, function (req, res, next) {
   Store.findById(req.payload.id).then(function (store) {
-    if (!store) { return res.sendStatus(401); }
+    if (req.payload.salt !== store.salt) { return res.sendStatus(401); }
     return res.json({ 'online': store.online });
   }).catch(next);
 });
 
 router.put('/online', auth.required, function (req, res, next) {
   Store.findById(req.payload.id).then(function (store) {
-    if (!store) { return res.sendStatus(401); }
+    if (req.payload.salt !== store.salt) { return res.sendStatus(401); }
     if (typeof req.query.online === 'undefined') { return res.sendStatus(500); }
     store.online = Boolean(Number(req.query.online));
     return store.save().then(function () {
@@ -163,7 +166,7 @@ function findStores(res, pincode, req, next) {
 
 router.put('/firebase', auth.required, function (req, res, next) {
   Store.findById(req.payload.id).then(function (store) {
-    if (!store) { return res.sendStatus(401); }
+    if (req.payload.salt !== store.salt) { return res.sendStatus(401); }
     if (typeof req.query.firebase !== 'undefined') {
       store.firebase = req.query.firebase;
       return store.save().then(function () {
@@ -175,7 +178,7 @@ router.put('/firebase', auth.required, function (req, res, next) {
 
 router.put('/', auth.required, function (req, res, next) {
   Store.findById(req.payload.id).then(function (store) {
-    if (!store) { return res.sendStatus(401); }
+    if (req.payload.salt !== store.salt) { return res.sendStatus(401); }
 
     // only update fields that were actually passed...
     if (typeof req.body.name !== 'undefined') {
@@ -247,6 +250,32 @@ router.post('/:temp', function (req, res, next) {
       }).catch(next);
     } else {
       return res.status(422).send({ errors: { 'User': 'OTP Incorrect' } })
+    }
+  }).catch(next);
+});
+
+router.put('/reset', function (req, res, next) {
+  if (req.body.reset === 'undefined') { return res.status(500).send({ errors: { 'Id': 'Invalid Id, Please try again later.' } }); }
+  StoreReset.findById(req.body.reset).then(function (reset) {
+    if (!reset) { return res.status(422).send({ errors: { 'Store': 'OTP Expired' } }) };
+    if (req.body.phone === reset.phone) {
+      if (req.body.code === reset.code) {
+        if (req.body.password !== 'undefined') {
+          Store.findOne({ phone: reset.phone }).then(function (store) {
+            if (!store) { return res.sendStatus(401); }
+            store.setPassword(req.body.password);
+            store.save().then(function () {
+              return res.sendStatus(200);
+            }).catch(next);
+          }).catch(next);
+        } else {
+          return res.status(500).send({ errors: { 'User': 'Invalid Password, Please try again later.' } })
+        }
+      } else {
+        return res.status(401).send({ errors: { 'OTP': 'Incorrect OTP' } });
+      }
+    } else {
+      return res.status(500).send({ errors: { 'User': 'Invalid Phone Number, Please try again later.' } })
     }
   }).catch(next);
 });

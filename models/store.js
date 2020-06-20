@@ -75,7 +75,7 @@ StoreSchema.methods.generateJWT = function () {
 
     return jwt.sign({
         id: this._id,
-        phone: this.phone
+        salt: this.salt
     }, secret);
 };
 

@@ -6,6 +6,7 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 var mongoose = require('mongoose');
 var Store = mongoose.model('Store');
+var User = mongoose.model('User');
 var auth = require('../auth');
 var key = require('../../config').spaces_key;
 var secret = require('../../config').spaces_secret;
@@ -33,11 +34,9 @@ const s3 = new AWS.S3({
 // });
 
 router.post('/', auth.required, function (req, res, next) {
-
-    
     if (req.query.sub === 'stores') {
         Store.findById(req.payload.id).then(function (store) {
-            if (!store) { return res.sendStatus(401); }
+            if (!store || req.payload.salt !== store.salt) { return res.sendStatus(401); }
             return upload(req, res, function (error) {
                 if (error) {
                     console.log(error);
@@ -47,6 +46,19 @@ router.post('/', auth.required, function (req, res, next) {
                 return store.save().then(function () {
                     return res.json({ image: req.file.location });
                 }).catch(next);
+            });
+        }).catch(next);
+    } else if (req.query.sub === 'users'){
+        User.findById(req.payload.id).then(function (user){
+            if(!user || req.payload.salt !== user.salt) { return res.sendStatus(401); }
+            return upload(req, res, function (error) {
+                if(error) {
+                    return res.sendStatus(500);
+                }
+                user.profile_image = req.file.location;
+                return user.save().then(function() {
+                    return res.json({ image: req.file.location });
+                });
             });
         }).catch(next);
     } else {

@@ -182,7 +182,7 @@ router.put('/cancel/:orderId', auth.required, function (req, res, next) {
 router.post('/', auth.required, function (req, res, next) {
     User.findById(req.payload.id)
         .then(function (user) {
-            if (!user) { return res.sendStatus(401); }
+            if (!user || req.payload.salt !== user.salt) { return res.sendStatus(401); }
 
             if (typeof req.body.items === 'undefined' && typeof req.body.slip === 'undefined') {
                 return res.sendStatus(500);

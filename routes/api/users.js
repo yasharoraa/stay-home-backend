@@ -3,6 +3,7 @@ var router = require('express').Router();
 var passport = require('passport');
 var User = mongoose.model('User');
 var UserTemp = mongoose.model('TempUser');
+var UserReset = mongoose.model('ResetUser');
 var auth = require('../auth');
 
 router.get('/', auth.required, function (req, res, next) {
@@ -15,15 +16,14 @@ router.get('/', auth.required, function (req, res, next) {
 
 router.get('/check', auth.required, function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
-        if (!user) { return res.sendStatus(401); }
-        console.log(user.firebase);
+        if (!user || req.payload.salt !== user.salt ) { return res.sendStatus(401); }
         return res.json({ firebase: user.firebase });
     }).catch(next);
 });
 
 router.put('/', auth.required, function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
-        if (!user) { return res.sendStatus(401); }
+        if (!user || req.payload.salt !== user.salt) { return res.sendStatus(401); }
 
         // only update fields that were actually passed...
         if (typeof req.body.name !== 'undefined') {
@@ -81,9 +81,36 @@ router.post('/:temp', function (req, res, next) {
 
 });
 
+router.put('/reset', function (req, res, next) {
+    if (req.body.reset === 'undefined') { return res.status(500).send({ errors: { 'Id': 'Invalid Id, Please try again later.' } }); }
+    UserReset.findById(req.body.reset).then(function (reset) {
+        if (!reset) { return res.status(422).send({ errors: { 'User': 'OTP Expired' } }) };
+        if (req.body.phone === reset.phone) {
+            if (req.body.code === reset.code) {
+                if (req.body.password !== 'undefined') {
+                    User.findOne({ phone: reset.phone }).then(function (user) {
+                        if (!user) { return res.sendStatus(401); }
+                        user.setPassword(req.body.password);
+                        user.save().then(reset.deleteOne())
+                            .then(function () {
+                                return res.sendStatus(200);
+                            }).catch(next);
+                    }).catch(next);
+                } else {
+                    return res.status(500).send({ errors: { 'User': 'Invalid Password, Please try again later.' } });
+                }
+            } else {
+                return res.status(401).send({ errors: { 'OTP': 'Incorrect OTP' } });
+            }
+        } else {
+            return res.status(500).send({ errors: { 'User': 'Invalid Phone Number, Please try again later.' } });
+        }
+    }).catch(next);
+});
+
 router.put('/firebase', auth.required, function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
-        if (!user) { return res.sendStatus(401); }
+        if (!user || req.payload.salt !== user.salt) { return res.sendStatus(401); }
         if (typeof req.query.firebase !== 'undefined') {
             user.firebase = req.query.firebase;
             return user.save().then(function () {
@@ -99,14 +126,14 @@ router.put('/firebase', auth.required, function (req, res, next) {
 router.get('/', auth.required, function (req, res, next) {
 
     User.findById(req.payload.id).then(function (user) {
-        if (!user) { return res.sendStatus(401); }
+        if (!user || req.payload.salt !== user.salt) { return res.sendStatus(401); }
         return res.json(user.toProfileJSONFor());
     }).catch(next);
 });
 
 router.get('/profile', auth.required, function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
-        if (!user) { return res.sendStatus(401); }
+        if (!user || req.payload.salt !== user.salt) { return res.sendStatus(401); }
         return res.json(user.toProfileJSONFor());
     }).catch(next);
 });

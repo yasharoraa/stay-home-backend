@@ -11,7 +11,7 @@ router.use('/address',require('./addresses'));
 router.use('/temp',require('./temps'));
 router.use('/version',require('./version'));
 router.use('/geocoding',require('./geocoding'));
-
+router.use('/reset',require('./password_reset'));
 
 router.use(function(err, req, res, next){
     if(err.name === 'ValidationError'){

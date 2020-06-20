@@ -21,7 +21,7 @@ router.post('/store', function (req, res, next) {
                 temp.password = req.body.user.password;
                 temp.code = Math.floor(100000 + Math.random() * 900000);
                 temp.save().then(function (temp) {
-                    sendSms(temp.phone, temp.code).then(function (response, err) {
+                    sendSms(temp.phone, temp.code, 0).then(function (response, err) {
                         if (err) {
                             return res.status(422).send({ errors: { 'Message': 'There was a problem sending a verification code' } });
                         }
@@ -49,7 +49,7 @@ router.post('/user', function (req, res, next) {
                 temp.password = req.body.user.password;
                 temp.code = Math.floor(100000 + Math.random() * 900000);
                 temp.save().then(function (temp) {
-                    sendSms(temp.phone, temp.code).then(function (response, err) {
+                    sendSms(temp.phone, temp.code, 0).then(function (response, err) {
                         if (err) {
                             return res.status(422).send({ errors: { 'Message': 'There was a problem sending a verification code' } });
                         }
