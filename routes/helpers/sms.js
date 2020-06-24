@@ -22,7 +22,6 @@ module.exports = function (number, otp , type) {
                     console.log(error);
                     reject(error);
                 }
-                console.log(body);
                 resolve(body);
             });
         } catch (e) {
