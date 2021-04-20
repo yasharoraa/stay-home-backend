@@ -49,8 +49,10 @@ require('./models/order')
 require('./models/slide');
 require('./models/temp');
 require('./models/reset');
+require('./models/message');
 require('./config/userpassport');
 require('./routes/auto_cancel_order');
+
 
 app.all('/api/*',check);
 

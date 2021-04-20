@@ -9,6 +9,7 @@ require('dotenv').config();
 var app = require('../app');
 var debug = require('debug')('quantrine:server');
 var http = require('http');
+var sockets = require('../chat/socket');
 
 /**
  * Get port from environment and store in Express.
@@ -27,6 +28,7 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+sockets(server);
 
 server.listen(port);
 server.on('error', onError);

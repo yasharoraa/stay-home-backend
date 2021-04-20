@@ -10,7 +10,7 @@ var User = mongoose.model('User');
 var auth = require('../auth');
 var key = require('../../config').spaces_key;
 var secret = require('../../config').spaces_secret;
-const spacesEndpoint = new AWS.Endpoint('nyc3.digitaloceanspaces.com');
+const spacesEndpoint = new AWS.Endpoint('ap-south-1.amazonaws.com');
 
 const s3 = new AWS.S3({
     endpoint: spacesEndpoint,
@@ -48,15 +48,15 @@ router.post('/', auth.required, function (req, res, next) {
                 }).catch(next);
             });
         }).catch(next);
-    } else if (req.query.sub === 'users'){
-        User.findById(req.payload.id).then(function (user){
-            if(!user || req.payload.salt !== user.salt) { return res.sendStatus(401); }
+    } else if (req.query.sub === 'users') {
+        User.findById(req.payload.id).then(function (user) {
+            if (!user || req.payload.salt !== user.salt) { return res.sendStatus(401); }
             return upload(req, res, function (error) {
-                if(error) {
+                if (error) {
                     return res.sendStatus(500);
                 }
                 user.profile_image = req.file.location;
-                return user.save().then(function() {
+                return user.save().then(function () {
                     return res.json({ image: req.file.location });
                 });
             });
@@ -69,7 +69,7 @@ router.post('/', auth.required, function (req, res, next) {
             }
             console.log(req.file.location);
             console.log("File uploaded successfully.");
-             return res.json({ image: req.file.location });
+            return res.json({ image: req.file.location });
         });
     }
 
@@ -77,7 +77,7 @@ router.post('/', auth.required, function (req, res, next) {
 
 router.delete('/', function (req, res, next) {
     var params = {
-        Bucket: "stayhome",
+        Bucket: "stayhomebucket",
         Key: req.query.name
     };
     s3.deleteObject(params, function (err, data) {
@@ -93,7 +93,7 @@ router.delete('/', function (req, res, next) {
 const upload = multer({
     storage: multerS3({
         s3: s3,
-        bucket: "stayhome",
+        bucket: "stayhomebucket",
         acl: "public-read",
         key: function (req, file, cb) {
             console.log(file);

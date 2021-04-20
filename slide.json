@@ -1,31 +1,30 @@
 [
     {
-        "text" : "How stay home works ?",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/stay_home_white.png"
+        "text": "How stay home works ?",
+        "icon": "https://stayhomebucket.s3.ap-south-1.amazonaws.com/stay_home_white.png"
     },
     {
-        "text" : "Select a shop of your choice to place an order.",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_store.png"
+        "text": "Select a shop of your choice to place an order.",
+        "icon": "https://stayhomebucket.s3.ap-south-1.amazonaws.com/slides/slide_store.png"
     },
     {
-        "text" : "Make a new list of items in the app.",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_list.png"
+        "text": "Make a new list of items in the app.",
+        "icon": "https://stayhomebucket.s3.ap-south-1.amazonaws.com/slides/slide_list.png"
     },
     {
-        "text" : "Or upload an hand written list of items.",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_slip.png"
+        "text": "Or upload an hand written list of items.",
+        "icon": "https://stayhomebucket.s3.ap-south-1.amazonaws.com/slides/slide_slip.png"
     },
     {
-        "text" : "We will send you a notification as soon as your order is accepted.",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_notification_one.png"
+        "text": "We will send you a notification as soon as your order is accepted.",
+        "icon": "https://stayhomebucket.s3.ap-south-1.amazonaws.com/slides/slide_notification_one.png"
     },
     {
-        "text" : "Another notification will be sent when the order is shipped.",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_notification.png"
+        "text": "Another notification will be sent when the order is shipped.",
+        "icon": "https://stayhomebucket.s3.ap-south-1.amazonaws.com/slides/slide_notification.png"
     },
     {
-        "text" : "And following our #StayHome pledge, the order will be at your doorstep in least possible time.",
-        "icon" : "https://stayhome.nyc3.digitaloceanspaces.com/slides/slide_ship.png"
+        "text": "And following our #StayHome pledge, the order will be at your doorstep in least possible time.",
+        "icon": "https://stayhomebucket.s3.ap-south-1.amazonaws.com/slides/slide_ship.png"
     }
-
 ]

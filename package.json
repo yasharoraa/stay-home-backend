@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
-    "dev": " node ./bin/www"
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "aws-sdk": "^2.659.0",
@@ -32,6 +32,6 @@
     "passport-local": "^1.0.0",
     "request": "^2.88.2",
     "slug": "^2.1.1",
-    "socket.io": "^2.3.0"
+    "ws": "^7.3.0"
   }
 }

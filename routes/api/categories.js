@@ -1,4 +1,4 @@
-var router = require('express').Router();
+ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Category = mongoose.model('Category');
 
