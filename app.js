@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var mongoUrl = require('./config').mongoUrl;
 var admin = require('firebase-admin');
 var serviceAccount = require('./config/service_account_file.json');
-var check = require('./check');
+// var check = require('./check');
 
 var app = express();
 
@@ -24,19 +24,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-const connect = mongoose.connect(mongoUrl, {useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex : true});
+const connect = mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
 connect.then((db) => {
-    console.log('Connected correctly to server');
+  console.log('Connected correctly to server');
 
 }, (err) => {
-    console.log(err);
+  console.log(err);
 });
 
 // catch 404 and forward to error handler
 
 admin.initializeApp({
-  credential : admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount)
 })
 
 
@@ -54,7 +54,7 @@ require('./config/userpassport');
 require('./routes/auto_cancel_order');
 
 
-app.all('/api/*',check);
+// app.all('/api/*',check);
 
 app.use(require('./routes'));
 
@@ -62,10 +62,10 @@ app.use(require('./routes'));
 
 
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = process.env.NODE_ENV === "production" ? {} : err;
