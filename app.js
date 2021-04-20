@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var mongoUrl = require('./config').mongoUrl;
 var admin = require('firebase-admin');
 var serviceAccount = require('./config/service_account_file.json');
-// var check = require('./check');
+var check = require('./check');
 
 var app = express();
 
@@ -54,7 +54,7 @@ require('./config/userpassport');
 require('./routes/auto_cancel_order');
 
 
-// app.all('/api/*',check);
+app.all('/api/*', check);
 
 app.use(require('./routes'));
 
