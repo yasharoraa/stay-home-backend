@@ -16,7 +16,7 @@ var sockets = require('../chat/socket');
  */
 console.log(`node env from app.js ${process.env.NODE_ENV}`);
 
-var port = normalizePort(process.env.NODE_ENV === "production" ? process.env.PORT : '3000');
+var port = normalizePort(process.env.NODE_ENV === "production" ? process.env.PORT : '3001');
 app.set('port', port);
 
 /**
