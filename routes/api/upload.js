@@ -10,7 +10,7 @@ var User = mongoose.model('User');
 var auth = require('../auth');
 var key = require('../../config').spaces_key;
 var secret = require('../../config').spaces_secret;
-const spacesEndpoint = new AWS.Endpoint('ap-south-1.amazonaws.com');
+const spacesEndpoint = new AWS.Endpoint('s3.ap-south-1.amazonaws.com');
 
 const s3 = new AWS.S3({
     endpoint: spacesEndpoint,
