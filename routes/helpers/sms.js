@@ -1,16 +1,16 @@
 var request = require('request');
 var reg_msg_prefix = 'Dear user, your OTP for StayHome registration is ';
 var reset_msg_prefix = 'Dear user, your OTP to reset your StayHome account password is ';
-var reg_msg_suffix = '. This OTP is valid for 5 minutes.'
-var reset_msg_suffix = '. This OTP is valid for 10 minutes.'
+var reg_msg_suffix = ' is your OTP for StayHome account registration. OTP valid for 5 minutes.'
+var reset_msg_suffix = ' is the OTP to reset your StayHome account password. OTP valid for 10 minutes.'
 var apikey = require('../../config').text_local_key;
 var sender = 'STYHME';
 
 
-module.exports = function (number, otp , type) {
+module.exports = function (number, otp, type) {
     var data = 'apikey=' + apikey + '&sender=' + sender + '&numbers=' + number + '&message=' +
-     rawurlencode((type===1?reset_msg_prefix:reg_msg_prefix) + otp.toString() + (type===1?reset_msg_suffix:reg_msg_suffix));
-    
+        rawurlencode(otp.toString() + (type === 1 ? reset_msg_suffix : reg_msg_suffix));
+
     var options = {
         method: "GET",
         url: 'https://api.textlocal.in/send?' + data
